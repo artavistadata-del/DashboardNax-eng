@@ -120,10 +120,10 @@ export default function LoginPage() {
       </div>
 
       {/* ── RIGHT PANEL — Login Form ── */}
-      <div className="flex-1 flex items-center justify-center p-8 relative z-10">
+      <div className="flex-1 flex items-center justify-center p-5 sm:p-8 relative z-10">
         <div className="w-full max-w-md">
           {/* Mobile logo */}
-          <div className="flex lg:hidden items-center gap-3 mb-10 justify-center">
+          <div className="flex lg:hidden items-center gap-3 mb-8 justify-center">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: 'linear-gradient(135deg, #f59e0b, #fbbf24)' }}>
               <span className="text-white font-black text-sm">N</span>
@@ -132,7 +132,7 @@ export default function LoginPage() {
           </div>
 
           {/* Card */}
-          <div className="animate-fade-up rounded-3xl p-10"
+          <div className="animate-fade-up rounded-2xl sm:rounded-3xl p-6 sm:p-10"
             style={{
               background: 'rgba(255,255,255,0.07)',
               backdropFilter: 'blur(24px)',

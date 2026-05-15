@@ -217,12 +217,12 @@ export default function OverviewView() {
 
       {/* Recent Shipments Table */}
       <div className="glass-card overflow-hidden">
-        <div className="px-6 py-4 flex items-center justify-between border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+        <div className="px-4 sm:px-6 py-4 flex items-center justify-between border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
           <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Recent Shipments</h3>
           <span className="badge badge-blue">{recentShipments.length} records</span>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="table-scroll-wrapper">
+          <table className="w-full text-sm" style={{ minWidth: '600px' }}>
             <thead>
               <tr className="text-left border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
                 {['AWB / ID', 'Client', 'Route', 'Type', 'Weight', 'Status'].map(h => (

@@ -77,9 +77,9 @@ export default function AlertsView() {
       </div>
 
       {/* Toolbar */}
-      <div className="glass-card px-5 py-4 flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-2">
-          <Filter size={14} className="text-slate-400"/>
+      <div className="glass-card px-4 sm:px-5 py-4 flex flex-col gap-3">
+        <div className="flex items-center gap-2 flex-wrap">
+          <Filter size={14} className="text-slate-400 flex-shrink-0"/>
           <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#94a3b8' }}>Severity:</span>
           {(['All', 'critical', 'warning', 'info', 'success'] as const).map(s => {
             const meta = s !== 'All' ? severityMeta[s] : null;
@@ -95,7 +95,7 @@ export default function AlertsView() {
           })}
         </div>
 
-        <div className="flex items-center gap-2 ml-auto flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs font-bold" style={{ color: '#94a3b8' }}>Category:</span>
           {categories.map(c => (
             <button key={c} onClick={() => setFilterCat(c)}
@@ -104,14 +104,14 @@ export default function AlertsView() {
               {c}
             </button>
           ))}
-        </div>
 
-        {unread > 0 && (
-          <button onClick={markAllRead} className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg transition-all"
-            style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981' }}>
-            <BellOff size={12}/> Mark All Read
-          </button>
-        )}
+          {unread > 0 && (
+            <button onClick={markAllRead} className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg transition-all ml-auto"
+              style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981' }}>
+              <BellOff size={12}/> Mark All Read
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Alert Feed */}

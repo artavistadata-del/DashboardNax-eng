@@ -77,7 +77,7 @@ export default function TrackingView() {
   const [selected, setSelected] = useState(trackingData[0]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 animate-fade-up">
+    <div className="flex flex-col lg:grid lg:grid-cols-3 gap-5 animate-fade-up">
       {/* Left — Shipment List */}
       <div className="space-y-3">
         <h3 className="font-black text-sm uppercase tracking-wider" style={{ color: '#94a3b8' }}>Active Shipments</h3>

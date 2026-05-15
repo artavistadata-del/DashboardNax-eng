@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -15,6 +16,7 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -22,6 +24,9 @@ body {
   background: var(--nax-bg);
   color: var(--nax-text);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* ===== SCROLLBAR ===== */
@@ -123,3 +128,52 @@ body {
 .badge-red    { background: rgba(239,68,68,0.1);  color: #991b1b; border-color: rgba(239,68,68,0.2);  }
 .badge-purple { background: rgba(139,92,246,0.1); color: #5b21b6; border-color: rgba(139,92,246,0.2); }
 .badge-gray   { background: rgba(100,116,139,0.1);color: #475569; border-color: rgba(100,116,139,0.2);}
+
+/* ===== MOBILE RESPONSIVE UTILITIES ===== */
+
+/* Prevent horizontal overflow on mobile */
+.mobile-scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile card stack (cards become full-width) */
+@media (max-width: 640px) {
+  .glass-card {
+    border-radius: 1rem;
+  }
+
+  /* Compact padding on mobile */
+  .mobile-compact {
+    padding: 1rem !important;
+  }
+}
+
+/* Touch-friendly buttons */
+@media (max-width: 768px) {
+  button {
+    min-height: 36px;
+  }
+}
+
+/* Prevent text overflow on small screens */
+.text-ellipsis-mobile {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Mobile table wrapper */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0 0 1.25rem 1.25rem;
+}
+
+/* Safe area for notched phones */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

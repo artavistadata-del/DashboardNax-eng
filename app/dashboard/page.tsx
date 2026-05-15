@@ -22,12 +22,24 @@ export default function DashboardPage() {
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuId>('overview');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (!isLoggedIn) router.push('/');
   }, [router]);
+
+  // Close sidebar on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   if (!isMounted) return null;
 
@@ -59,14 +71,20 @@ export default function DashboardPage() {
         activeMenu={activeMenu}
         setActiveMenu={(m) => setActiveMenu(m as MenuId)}
         unreadAlerts={UNREAD_ALERTS}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
       {/* Main area */}
-      <div className="flex-1 flex flex-col overflow-hidden relative z-10">
-        <Header activeMenu={activeMenu} unreadAlerts={UNREAD_ALERTS} />
+      <div className="flex-1 flex flex-col overflow-hidden relative z-10 min-w-0">
+        <Header
+          activeMenu={activeMenu}
+          unreadAlerts={UNREAD_ALERTS}
+          onMenuToggle={() => setSidebarOpen(prev => !prev)}
+        />
 
         <main className="flex-1 overflow-y-auto">
-          <div className="p-7 max-w-[1400px] mx-auto w-full">
+          <div className="p-4 sm:p-6 lg:p-7 max-w-[1400px] mx-auto w-full">
             {renderContent()}
           </div>
         </main>

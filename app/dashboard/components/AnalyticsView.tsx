@@ -83,18 +83,18 @@ export default function AnalyticsView() {
       </div>
 
       {/* Revenue Bar Chart */}
-      <div className="glass-card p-6">
-        <div className="flex items-center justify-between mb-5">
+      <div className="glass-card p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
           <div>
             <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Revenue by Service Type</h3>
             <p className="text-xs font-medium mt-0.5" style={{ color: '#94a3b8' }}>Monthly breakdown in USD (thousands)</p>
           </div>
-          <button className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg transition-all"
+          <button className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg transition-all self-start sm:self-auto"
             style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)', color: 'white', boxShadow: '0 2px 8px rgba(30,58,138,0.3)' }}>
             <Download size={12}/> Export PDF
           </button>
         </div>
-        <ReactECharts option={revenueOption} style={{ height: 260 }}/>
+        <ReactECharts option={revenueOption} style={{ height: 240 }}/>
       </div>
 
       {/* 2-col charts */}
@@ -143,9 +143,10 @@ export default function AnalyticsView() {
         </div>
 
         {/* Product breakdown table */}
-        <div className="glass-card p-6">
+        <div className="glass-card p-4 sm:p-6">
           <h3 className="font-black text-base mb-4" style={{ color: '#0f172a' }}>Product Category Performance</h3>
-          <table className="w-full text-sm">
+          <div className="table-scroll-wrapper">
+          <table className="w-full text-sm" style={{ minWidth: '380px' }}>
             <thead>
               <tr className="border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
                 {['Category', 'Volume', 'Revenue', 'Growth'].map(h => (
@@ -172,6 +173,7 @@ export default function AnalyticsView() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>

@@ -100,15 +100,15 @@ export default function ShipmentsView() {
   return (
     <div className="space-y-5 animate-fade-up">
       {/* Toolbar */}
-      <div className="glass-card px-5 py-4 flex flex-wrap items-center gap-3">
-        <div className="relative flex-1 min-w-[180px]">
+      <div className="glass-card px-4 sm:px-5 py-4 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3">
+        <div className="relative flex-1 min-w-0 w-full sm:w-auto sm:min-w-[180px]">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"/>
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search client or AWB..."
             className={inputClass + " pl-9"} style={inputStyle}/>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
           <Filter size={14} className="text-slate-400"/>
           {(['All', 'Processing', 'In Transit', 'Customs', 'Delivered', 'On Hold'] as const).map(st => (
             <button key={st} onClick={() => setFilterStatus(st)}
@@ -122,7 +122,7 @@ export default function ShipmentsView() {
         </div>
 
         <button onClick={() => { resetForm(); setShowForm(true); }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-white ml-auto"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-white w-full sm:w-auto sm:ml-auto justify-center sm:justify-start"
           style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)', boxShadow: '0 4px 12px rgba(30,58,138,0.3)' }}>
           <Plus size={15}/> New Shipment
         </button>
@@ -206,8 +206,8 @@ export default function ShipmentsView() {
           <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Shipment Records</h3>
           <span className="badge badge-blue">{filtered.length} of {shipments.length}</span>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="table-scroll-wrapper">
+          <table className="w-full text-sm" style={{ minWidth: '780px' }}>
             <thead>
               <tr className="text-left border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
                 {['AWB', 'Client', 'Product', 'Route', 'Weight', 'Type', 'Status', 'Date', ''].map(h => (

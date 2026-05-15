@@ -164,14 +164,13 @@ export default function ColdStorageView() {
             { time: '10:20:44', chamber: 'B2', event: 'New cargo loaded — 840 kg fresh produce', type: 'info' },
             { time: '09:15:30', chamber: 'C1', event: 'Defrost cycle initiated and completed', type: 'info' },
           ].map((ev, i) => (
-            <div key={i} className="flex items-center gap-4 text-sm py-2 border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+            <div key={i} className="flex flex-wrap items-start sm:items-center gap-2 sm:gap-4 text-sm py-2.5 border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
               <span className="text-xs font-mono font-bold flex-shrink-0" style={{ color: '#94a3b8' }}>{ev.time}</span>
               <span className="text-xs font-black px-2 py-0.5 rounded-md flex-shrink-0"
                 style={{ background: 'rgba(30,58,138,0.1)', color: '#1e3a8a' }}>{ev.chamber}</span>
-              <span className="flex-1 font-medium" style={{ color: ev.type === 'critical' ? '#ef4444' : ev.type === 'warning' ? '#f59e0b' : '#475569' }}>
+              <span className="flex-1 min-w-0 font-medium text-xs sm:text-sm" style={{ color: ev.type === 'critical' ? '#ef4444' : ev.type === 'warning' ? '#f59e0b' : '#475569' }}>
                 {ev.event}
               </span>
-              <Clock size={12} style={{ color: '#94a3b8' }}/>
             </div>
           ))}
         </div>

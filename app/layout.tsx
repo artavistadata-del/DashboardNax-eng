@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   description: "NAX (U.S.A.), INC. — Premium freight forwarding & cold chain logistics platform serving the U.S. West Coast.",
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
