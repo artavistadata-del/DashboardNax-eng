@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { ToastProvider } from './components/Toast';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import OverviewView from './components/OverviewView';
@@ -58,37 +59,39 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden relative" style={{ background: '#eef2f8' }}>
+    <ToastProvider>
+      <div className="flex h-screen overflow-hidden relative" style={{ background: '#eef2f8' }}>
 
-      {/* Background ambient orbs */}
-      <div className="fixed top-[-10%] left-[-5%] w-[450px] h-[450px] rounded-full pointer-events-none z-0"
-        style={{ background: 'radial-gradient(circle, rgba(30,58,138,0.08), transparent 70%)', filter: 'blur(60px)' }}/>
-      <div className="fixed bottom-[-10%] right-[-5%] w-[450px] h-[450px] rounded-full pointer-events-none z-0"
-        style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.08), transparent 70%)', filter: 'blur(60px)' }}/>
+        {/* Background ambient orbs */}
+        <div className="fixed top-[-10%] left-[-5%] w-[450px] h-[450px] rounded-full pointer-events-none z-0"
+          style={{ background: 'radial-gradient(circle, rgba(30,58,138,0.08), transparent 70%)', filter: 'blur(60px)' }}/>
+        <div className="fixed bottom-[-10%] right-[-5%] w-[450px] h-[450px] rounded-full pointer-events-none z-0"
+          style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.08), transparent 70%)', filter: 'blur(60px)' }}/>
 
-      {/* Sidebar */}
-      <Sidebar
-        activeMenu={activeMenu}
-        setActiveMenu={(m) => setActiveMenu(m as MenuId)}
-        unreadAlerts={UNREAD_ALERTS}
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
-
-      {/* Main area */}
-      <div className="flex-1 flex flex-col overflow-hidden relative z-10 min-w-0">
-        <Header
+        {/* Sidebar */}
+        <Sidebar
           activeMenu={activeMenu}
+          setActiveMenu={(m) => setActiveMenu(m as MenuId)}
           unreadAlerts={UNREAD_ALERTS}
-          onMenuToggle={() => setSidebarOpen(prev => !prev)}
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
         />
 
-        <main className="flex-1 overflow-y-auto">
-          <div className="p-4 sm:p-6 lg:p-7 max-w-[1400px] mx-auto w-full">
-            {renderContent()}
-          </div>
-        </main>
+        {/* Main area */}
+        <div className="flex-1 flex flex-col overflow-hidden relative z-10 min-w-0">
+          <Header
+            activeMenu={activeMenu}
+            unreadAlerts={UNREAD_ALERTS}
+            onMenuToggle={() => setSidebarOpen(prev => !prev)}
+          />
+
+          <main className="flex-1 overflow-y-auto">
+            <div className="p-4 sm:p-6 lg:p-7 max-w-[1400px] mx-auto w-full">
+              {renderContent()}
+            </div>
+          </main>
+        </div>
       </div>
-    </div>
+    </ToastProvider>
   );
 }
