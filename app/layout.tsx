@@ -9,8 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NAX USA Logistics — Freight Portal",
+  title: "NAX USA Logistics",
   description: "NAX (U.S.A.), INC. — Premium freight forwarding & cold chain logistics platform serving the U.S. West Coast.",
+  // Tambahkan bagian icons ini untuk memanggil favicon di folder public
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export const viewport = {
