@@ -2,27 +2,21 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Eye, EyeOff, ArrowRight, Package, Shield, Thermometer, Star } from 'lucide-react';
+import { Eye, EyeOff, ArrowRight } from 'lucide-react';
 
 const SLIDES = [
   {
-    headline: 'Kendalikan Pengiriman\nGlobal Anda.',
-    sub: 'Pantau status kiriman udara & laut, kelola dokumen, dan koordinasi klien — semua dalam satu platform.',
+    headline: 'Take Control of\nGlobal Shipments.',
+    sub: 'Monitor air & ocean freight status, manage documents, and coordinate clients — all in one platform.',
   },
   {
     headline: 'Cold Storage\nReal-Time.',
-    sub: 'Monitor suhu kontainer refrigerated dari mana saja. Alert otomatis saat terjadi anomali.',
+    sub: 'Monitor refrigerated container temperatures from anywhere. Automatic alerts when anomalies occur.',
   },
   {
-    headline: 'Data Aman,\nOperasi Lancar.',
-    sub: 'Enkripsi end-to-end dan audit trail lengkap untuk setiap transaksi pengiriman Anda.',
+    headline: 'Secure Data,\nSmooth Operations.',
+    sub: 'End-to-end encryption and a complete audit trail for every freight transaction you handle.',
   },
-];
-
-const STATS = [
-  { value: '2,400+', label: 'Pengiriman/bulan' },
-  { value: '99.2%', label: 'Tepat waktu' },
-  { value: '18', label: 'Negara tujuan' },
 ];
 
 export default function LoginPage() {
@@ -39,7 +33,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     if (!email || !password) {
-      setError('Mohon isi email dan password terlebih dahulu.');
+      setError('Please enter your email and password to continue.');
       return;
     }
     setLoading(true);
@@ -49,48 +43,39 @@ export default function LoginPage() {
     }, 1400);
   };
 
-  const quickFill = () => {
-    setEmail('admin@naxusa.com');
-    setPassword('demo1234');
-  };
-
   return (
     <div className="min-h-screen flex" style={{ fontFamily: "'Inter', sans-serif" }}>
 
       {/* ── LEFT PANEL — Clean Form ── */}
-      <div className="flex-1 flex flex-col justify-between bg-white px-8 py-10 sm:px-12 lg:px-16 relative overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center bg-white px-8 py-10 sm:px-12 lg:px-16 relative overflow-hidden">
 
-        {/* Subtle top-left accent */}
+        {/* Subtle accent blobs */}
+        <div className="absolute top-0 left-0 w-full h-2 rounded-none pointer-events-none"
+          style={{ background: 'linear-gradient(90deg, #1e3a8a, #f59e0b)' }} />
         <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.08), transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.06), transparent 70%)' }} />
         <div className="absolute -bottom-20 -right-20 w-56 h-56 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(30,58,138,0.06), transparent 70%)' }} />
-
-        {/* Logo */}
-        <div className="flex items-center gap-3 relative z-10">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-            style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)' }}>
-            <Package size={19} className="text-white" />
-          </div>
-          <div>
-            <span className="font-black text-base tracking-tight" style={{ color: '#0f2557' }}>NAX USA Logistics</span>
-            <div className="flex items-center gap-1 mt-0.5">
-              <Shield size={9} style={{ color: '#10b981' }} />
-              <span className="text-xs font-semibold" style={{ color: '#10b981' }}>Terverifikasi &amp; Aman</span>
-            </div>
-          </div>
-        </div>
+          style={{ background: 'radial-gradient(circle, rgba(30,58,138,0.04), transparent 70%)' }} />
 
         {/* Form area */}
         <div className="w-full max-w-sm mx-auto relative z-10">
 
+          {/* LOGO BARU NAX USA */}
+          <div className="mb-10">
+            <img
+              src="/logo_nax-FIX.png"
+              alt="NAX USA Logistics Logo"
+              className="h-16 w-auto object-contain"
+            />
+          </div>
+
           {/* Greeting */}
           <div className="mb-8">
-            <h1 className="text-3xl font-black mb-1.5" style={{ color: '#0f172a' }}>
-              Selamat datang kembali!
+            <h1 className="text-3xl font-black mb-2 tracking-tight" style={{ color: '#0f172a' }}>
+              Welcome back!
             </h1>
-            <p className="text-sm" style={{ color: '#64748b' }}>
-              Masuk untuk melanjutkan ke portal logistik Anda.
+            <p className="text-sm font-medium" style={{ color: '#64748b' }}>
+              Sign in to continue to your logistics portal.
             </p>
           </div>
 
@@ -113,7 +98,7 @@ export default function LoginPage() {
               <input
                 id="login-email"
                 type="email"
-                placeholder="contoh@naxusa.com"
+                placeholder="florian@naxusa.com"
                 value={email}
                 onChange={e => { setEmail(e.target.value); setError(''); }}
                 className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all"
@@ -139,13 +124,13 @@ export default function LoginPage() {
             {/* Password */}
             <div>
               <label className="block text-xs font-bold mb-2 uppercase tracking-wider" style={{ color: '#64748b' }}>
-                Kata Sandi
+                Password
               </label>
               <div className="relative">
                 <input
                   id="login-password"
                   type={showPass ? 'text' : 'password'}
-                  placeholder="Masukkan kata sandi"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={e => { setPassword(e.target.value); setError(''); }}
                   className="w-full pl-4 pr-11 py-3 rounded-xl text-sm outline-none transition-all"
@@ -169,7 +154,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPass(v => !v)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 rounded-lg transition-colors"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg transition-colors hover:bg-slate-200/50"
                   style={{ color: '#94a3b8' }}>
                   {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -177,23 +162,32 @@ export default function LoginPage() {
             </div>
 
             {/* Remember + Forgot */}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={e => setRemember(e.target.checked)}
-                  className="w-4 h-4 rounded cursor-pointer"
-                  style={{ accentColor: '#1e3a8a' }}
-                />
-                <span className="text-sm" style={{ color: '#64748b' }}>Ingat saya</span>
+            <div className="flex items-center justify-between pt-1">
+              <label className="flex items-center gap-2.5 cursor-pointer">
+                <div className="relative flex items-center justify-center">
+                  <input
+                    type="checkbox"
+                    checked={remember}
+                    onChange={e => setRemember(e.target.checked)}
+                    className="w-4 h-4 rounded cursor-pointer peer appearance-none"
+                    style={{ border: '1.5px solid #cbd5e1', background: '#fff' }}
+                  />
+                  {remember && (
+                    <div className="absolute inset-0 rounded bg-blue-900 flex items-center justify-center pointer-events-none">
+                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <span className="text-sm font-medium" style={{ color: '#64748b' }}>Remember me</span>
               </label>
               <button
                 type="button"
-                onClick={() => alert('Link reset kata sandi telah dikirim ke email Anda.')}
-                className="text-sm font-semibold transition-opacity hover:opacity-70"
+                onClick={() => alert('Password reset flow initiated.')}
+                className="text-sm font-bold transition-opacity hover:opacity-70"
                 style={{ color: '#1e3a8a' }}>
-                Lupa kata sandi?
+                Forgot password?
               </button>
             </div>
 
@@ -202,107 +196,108 @@ export default function LoginPage() {
               id="login-submit"
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2.5 transition-all group relative overflow-hidden mt-1"
+              className="w-full py-3.5 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2.5 transition-all group relative overflow-hidden mt-3"
               style={{
                 background: loading ? 'rgba(30,58,138,0.5)' : 'linear-gradient(135deg, #1e3a8a 0%, #2a4db3 100%)',
-                boxShadow: loading ? 'none' : '0 4px 20px rgba(30,58,138,0.35)',
-              }}>
-              {/* Hover shimmer */}
+                boxShadow: loading ? 'none' : '0 4px 20px rgba(30,58,138,0.30)',
+              }}
+            >
               {!loading && (
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.12), transparent)' }} />
+                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.15), transparent)' }} />
               )}
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Memverifikasi...
+                  Authenticating...
                 </>
               ) : (
                 <>
-                  Masuk ke Portal
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+                  Sign In
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </>
               )}
             </button>
           </form>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 my-5">
+          <div className="flex items-center gap-4 my-7">
             <div className="flex-1 h-px" style={{ background: '#e2e8f0' }} />
-            <span className="text-xs font-medium" style={{ color: '#94a3b8' }}>atau</span>
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: '#94a3b8' }}>Or Continue With</span>
             <div className="flex-1 h-px" style={{ background: '#e2e8f0' }} />
           </div>
 
-          {/* Quick demo fill */}
+          {/* Login with Google */}
           <button
-            id="demo-login-btn"
-            onClick={quickFill}
-            className="w-full py-3 rounded-xl text-sm font-semibold transition-all hover:scale-[1.01] active:scale-[0.99]"
+            type="button"
+            onClick={() => alert('Google authentication flow initiated.')}
+            className="w-full py-3.5 rounded-xl text-sm font-bold flex items-center justify-center gap-3 transition-all hover:bg-slate-50"
             style={{
-              background: '#f8fafc',
+              background: '#ffffff',
               border: '1.5px solid #e2e8f0',
-              color: '#64748b',
+              color: '#334155',
             }}>
-            🔑 Isi Otomatis Akun Demo
+            <svg className="w-5 h-5" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+            </svg>
+            Sign in with Google
           </button>
         </div>
-
-        {/* Footer */}
-        <p className="text-xs text-center relative z-10" style={{ color: '#cbd5e1' }}>
-          © 2026 NAX (U.S.A.), INC. · Los Angeles, CA · Semua hak dilindungi
-        </p>
       </div>
 
-      {/* ── RIGHT PANEL — Visual Hero ── */}
-      <div className="hidden lg:flex flex-col justify-between w-[52%] relative overflow-hidden">
+      {/* ── RIGHT PANEL — Beautified Visual Hero ── */}
+      <div className="hidden lg:block w-[55%] relative overflow-hidden bg-slate-900">
 
         {/* Background image */}
         <img
-          src="/login-hero.png"
+          src="/login-hero.jpg"
           alt="NAX Logistics"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover opacity-80"
         />
 
-        {/* Dark overlay */}
+        {/* Smoother, elegant gradient overlay */}
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(160deg, rgba(6,14,31,0.72) 0%, rgba(15,37,87,0.55) 50%, rgba(6,14,31,0.80) 100%)' }} />
+          style={{ background: 'linear-gradient(to top, rgba(15,23,42,1) 0%, rgba(15,23,42,0.6) 40%, rgba(15,23,42,0.1) 100%)' }} />
 
-        {/* Top content */}
-        <div className="relative z-10 p-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold"
-            style={{ background: 'rgba(245,158,11,0.18)', border: '1px solid rgba(245,158,11,0.35)', color: '#fbbf24' }}>
-            🚀 Sistem Manajemen Logistik Modern
+        {/* Content Area - Placed cleanly at the bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-16 pb-20">
+
+          {/* Top subtle badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wide uppercase mb-6"
+            style={{ background: 'rgba(245,158,11,0.15)', border: '1px solid rgba(245,158,11,0.3)', color: '#fbbf24' }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+            Modern Logistics Hub
           </div>
-        </div>
 
-        {/* Center — Slide text */}
-        <div className="relative z-10 px-12 pb-4">
-          <h2 className="text-4xl font-black text-white leading-tight mb-4 whitespace-pre-line">
+          <h2 className="text-5xl font-black text-white leading-[1.1] mb-5 tracking-tight">
             {SLIDES[activeSlide].headline.split('\n').map((line, i) => (
-              <span key={i}>
+              <span key={i} className="block">
                 {i === 1
                   ? <span style={{ background: 'linear-gradient(90deg, #f59e0b, #fbbf24)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{line}</span>
                   : line}
-                {i < SLIDES[activeSlide].headline.split('\n').length - 1 && <br />}
               </span>
             ))}
           </h2>
-          <p className="text-sm leading-relaxed max-w-xs" style={{ color: 'rgba(219,234,254,0.75)' }}>
+
+          <p className="text-base font-medium leading-relaxed max-w-md" style={{ color: 'rgba(241,245,249,0.7)' }}>
             {SLIDES[activeSlide].sub}
           </p>
 
-          {/* Slide dots */}
-          <div className="flex gap-2 mt-6">
+          {/* Slide dots - Elegant style */}
+          <div className="flex gap-2 mt-10">
             {SLIDES.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActiveSlide(i)}
-                className="transition-all"
+                className="transition-all duration-300 ease-out"
                 style={{
-                  width: i === activeSlide ? '24px' : '8px',
+                  width: i === activeSlide ? '32px' : '8px',
                   height: '8px',
                   borderRadius: '9999px',
-                  background: i === activeSlide ? '#f59e0b' : 'rgba(255,255,255,0.3)',
+                  background: i === activeSlide ? '#f59e0b' : 'rgba(255,255,255,0.2)',
                   border: 'none',
                   cursor: 'pointer',
                 }}
@@ -311,53 +306,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Bottom — Stats + Testimonial */}
-        <div className="relative z-10 p-10">
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-3 mb-6">
-            {STATS.map((s, i) => (
-              <div key={i} className="rounded-2xl p-4"
-                style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                <p className="text-xl font-black text-white">{s.value}</p>
-                <p className="text-xs mt-0.5 font-medium" style={{ color: 'rgba(148,163,184,0.9)' }}>{s.label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Testimonial card */}
-          <div className="rounded-2xl p-4"
-            style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div className="flex gap-1 mb-2">
-              {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="#f59e0b" stroke="none" />)}
-            </div>
-            <p className="text-sm italic leading-relaxed" style={{ color: 'rgba(219,234,254,0.8)' }}>
-              &ldquo;NAX membuat kami bisa lacak kiriman segar dari Jepang ke LA dalam hitungan menit. Sangat membantu!&rdquo;
-            </p>
-            <div className="flex items-center gap-2.5 mt-3">
-              <img src="https://i.pravatar.cc/40?img=1" alt="" className="w-7 h-7 rounded-full"
-                style={{ border: '1.5px solid rgba(245,158,11,0.4)' }} />
-              <div>
-                <p className="text-xs font-bold text-white">Hiroshi T.</p>
-                <p className="text-xs" style={{ color: '#64748b' }}>Tsukiji Fish Market</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Feature pills */}
-          <div className="flex flex-wrap gap-2 mt-5">
-            {[
-              { icon: <Thermometer size={11} />, text: 'Cold Storage Monitor', color: '#60a5fa' },
-              { icon: <Package size={11} />, text: 'Live Tracking', color: '#34d399' },
-              { icon: <Shield size={11} />, text: 'Enkripsi TLS 1.3', color: '#f59e0b' },
-            ].map((f, i) => (
-              <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
-                style={{ background: `${f.color}18`, border: `1px solid ${f.color}35`, color: f.color }}>
-                {f.icon}
-                {f.text}
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

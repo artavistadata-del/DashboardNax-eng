@@ -14,8 +14,9 @@ import ClientsView from './components/ClientsView';
 import AnalyticsView from './components/AnalyticsView';
 import AlertsView from './components/AlertsView';
 import SettingsView from './components/SettingsView';
+import ProfileView from './components/ProfileView';
 
-type MenuId = 'overview' | 'shipments' | 'tracking' | 'storage' | 'clients' | 'analytics' | 'alerts' | 'settings';
+type MenuId = 'overview' | 'shipments' | 'tracking' | 'storage' | 'clients' | 'analytics' | 'alerts' | 'settings' | 'profile';
 
 const UNREAD_ALERTS = 3;
 
@@ -54,6 +55,7 @@ export default function DashboardPage() {
       case 'analytics':  return <AnalyticsView />;
       case 'alerts':     return <AlertsView />;
       case 'settings':   return <SettingsView />;
+      case 'profile':    return <ProfileView />;
       default:           return <OverviewView />;
     }
   };

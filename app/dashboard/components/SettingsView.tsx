@@ -11,9 +11,9 @@ export default function SettingsView() {
     name: 'John Abraham',
     email: 'john.abraham@naxusa.com',
     phone: '+1 310-555-0199',
-    role: 'Manajer Operasional',
+    role: 'Operations Manager',
     location: 'Los Angeles, CA',
-    language: 'Bahasa Indonesia',
+    language: 'English',
     timezone: 'America/Los_Angeles',
   });
 
@@ -30,7 +30,7 @@ export default function SettingsView() {
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     setSaved(true);
-    showToast('success', 'Pengaturan disimpan!', 'Semua perubahan Anda telah berhasil tersimpan.');
+    showToast('success', 'Settings saved!', 'All your changes have been saved successfully.');
     setTimeout(() => setSaved(false), 2500);
   };
 
@@ -47,7 +47,7 @@ export default function SettingsView() {
       </div>
       <button
         type="button"
-        onClick={() => { onChange(); showToast(checked ? 'info' : 'success', `${label} ${checked ? 'dimatikan' : 'diaktifkan'}`); }}
+        onClick={() => { onChange(); showToast(checked ? 'info' : 'success', `${label} ${checked ? 'disabled' : 'enabled'}`); }}
         className="relative w-12 h-6 rounded-full transition-all duration-300 flex-shrink-0 ml-4"
         style={{ background: checked ? '#1e3a8a' : '#e2e8f0' }}>
         <span className="absolute top-0.5 transition-all duration-300 w-5 h-5 bg-white rounded-full shadow-md"
@@ -67,20 +67,20 @@ export default function SettingsView() {
               <User size={18}/>
             </div>
             <div>
-              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Profil Saya</h3>
-              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Informasi akun dan identitas Anda</p>
+              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>My Profile</h3>
+              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Your account information and identity</p>
             </div>
           </div>
 
           {/* Avatar */}
           <div className="flex items-center gap-5 mb-6 pb-6 border-b" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
             <div className="relative">
-              <img src="https://i.pravatar.cc/150?img=11" alt="Foto Profil" className="w-20 h-20 rounded-2xl border-2 object-cover" style={{ borderColor: '#f59e0b' }}/>
+              <img src="https://i.pravatar.cc/150?img=11" alt="Profile Photo" className="w-20 h-20 rounded-2xl border-2 object-cover" style={{ borderColor: '#f59e0b' }}/>
               <button type="button"
-                onClick={() => showToast('info', 'Pilih foto baru', 'Fitur unggah foto akan segera tersedia.')}
+                onClick={() => showToast('info', 'Select new photo', 'Photo upload feature coming soon.')}
                 className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
                 style={{ background: '#1e3a8a' }}
-                title="Ganti foto profil">
+                title="Change profile photo">
                 <Camera size={14}/>
               </button>
             </div>
@@ -89,18 +89,18 @@ export default function SettingsView() {
               <p className="text-sm font-semibold" style={{ color: '#94a3b8' }}>{profile.role}</p>
               <span className="text-xs font-bold px-2.5 py-1 rounded-full mt-2 inline-block"
                 style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981' }}>
-                ● Aktif & Terverifikasi
+                ● Active &amp; Verified
               </span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {[
-              { label: 'Nama Lengkap', field: 'name', type: 'text', placeholder: 'Nama Anda' },
-              { label: 'Alamat Email', field: 'email', type: 'email', placeholder: 'email@naxusa.com' },
-              { label: 'Nomor HP', field: 'phone', type: 'tel', placeholder: '+62 ...' },
-              { label: 'Jabatan', field: 'role', type: 'text', placeholder: 'cth. Manajer Operasional' },
-              { label: 'Kota / Lokasi', field: 'location', type: 'text', placeholder: 'cth. Los Angeles, CA' },
+              { label: 'Full Name', field: 'name', type: 'text', placeholder: 'Your name' },
+              { label: 'Email Address', field: 'email', type: 'email', placeholder: 'email@naxusa.com' },
+              { label: 'Phone Number', field: 'phone', type: 'tel', placeholder: '+1 ...' },
+              { label: 'Job Title', field: 'role', type: 'text', placeholder: 'e.g. Operations Manager' },
+              { label: 'City / Location', field: 'location', type: 'text', placeholder: 'e.g. Los Angeles, CA' },
             ].map(f => (
               <div key={f.field}>
                 <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>{f.label}</label>
@@ -111,11 +111,11 @@ export default function SettingsView() {
               </div>
             ))}
             <div>
-              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Bahasa</label>
+              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Language</label>
               <select value={profile.language} onChange={e => setProfile(p => ({ ...p, language: e.target.value }))}
                 className={inputClass} style={inputStyle}>
-                <option>Bahasa Indonesia</option>
                 <option>English</option>
+                <option>Bahasa Indonesia</option>
                 <option>日本語 (Japanese)</option>
                 <option>中文 (Chinese)</option>
                 <option>Español</option>
@@ -131,17 +131,17 @@ export default function SettingsView() {
               <Bell size={18}/>
             </div>
             <div>
-              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Pengaturan Notifikasi</h3>
-              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Pilih cara Anda ingin menerima pemberitahuan</p>
+              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Notification Settings</h3>
+              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Choose how you want to receive notifications</p>
             </div>
           </div>
-          <Toggle checked={notif.emailAlerts} onChange={() => setNotif(p => ({ ...p, emailAlerts: !p.emailAlerts }))} label="Notifikasi via Email" desc="Terima pemberitahuan ke kotak masuk email Anda"/>
-          <Toggle checked={notif.smsAlerts} onChange={() => setNotif(p => ({ ...p, smsAlerts: !p.smsAlerts }))} label="Notifikasi via SMS" desc="Terima SMS untuk peringatan penting"/>
-          <Toggle checked={notif.criticalOnly} onChange={() => setNotif(p => ({ ...p, criticalOnly: !p.criticalOnly }))} label="Hanya Notifikasi Kritis" desc="Abaikan info & pembaruan rutin"/>
-          <Toggle checked={notif.weeklyReport} onChange={() => setNotif(p => ({ ...p, weeklyReport: !p.weeklyReport }))} label="Laporan Mingguan" desc="Ringkasan otomatis setiap Senin pagi"/>
-          <Toggle checked={notif.shipmentUpdates} onChange={() => setNotif(p => ({ ...p, shipmentUpdates: !p.shipmentUpdates }))} label="Pembaruan Status Kiriman" desc="Notifikasi setiap kali status pengiriman berubah"/>
-          <Toggle checked={notif.coldChainAlerts} onChange={() => setNotif(p => ({ ...p, coldChainAlerts: !p.coldChainAlerts }))} label="Alarm Suhu Cold Storage" desc="Peringatan saat suhu keluar dari batas aman"/>
-          <Toggle checked={notif.customsAlerts} onChange={() => setNotif(p => ({ ...p, customsAlerts: !p.customsAlerts }))} label="Notifikasi Bea Cukai" desc="Pembaruan status izin masuk & pemeriksaan"/>
+          <Toggle checked={notif.emailAlerts} onChange={() => setNotif(p => ({ ...p, emailAlerts: !p.emailAlerts }))} label="Email Notifications" desc="Receive alerts to your email inbox"/>
+          <Toggle checked={notif.smsAlerts} onChange={() => setNotif(p => ({ ...p, smsAlerts: !p.smsAlerts }))} label="SMS Notifications" desc="Receive SMS for important alerts"/>
+          <Toggle checked={notif.criticalOnly} onChange={() => setNotif(p => ({ ...p, criticalOnly: !p.criticalOnly }))} label="Critical Alerts Only" desc="Skip routine info &amp; updates"/>
+          <Toggle checked={notif.weeklyReport} onChange={() => setNotif(p => ({ ...p, weeklyReport: !p.weeklyReport }))} label="Weekly Report" desc="Automatic summary every Monday morning"/>
+          <Toggle checked={notif.shipmentUpdates} onChange={() => setNotif(p => ({ ...p, shipmentUpdates: !p.shipmentUpdates }))} label="Shipment Status Updates" desc="Notify on every shipment status change"/>
+          <Toggle checked={notif.coldChainAlerts} onChange={() => setNotif(p => ({ ...p, coldChainAlerts: !p.coldChainAlerts }))} label="Cold Storage Temperature Alerts" desc="Alert when temperature exceeds safe limits"/>
+          <Toggle checked={notif.customsAlerts} onChange={() => setNotif(p => ({ ...p, customsAlerts: !p.customsAlerts }))} label="Customs Notifications" desc="Updates on clearance status &amp; inspections"/>
         </div>
 
         {/* System Config */}
@@ -151,13 +151,13 @@ export default function SettingsView() {
               <Globe size={18}/>
             </div>
             <div>
-              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Konfigurasi Tampilan</h3>
-              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Atur zona waktu dan satuan pengukuran</p>
+              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Display Configuration</h3>
+              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Set your timezone and measurement units</p>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Zona Waktu</label>
+              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Timezone</label>
               <select value={profile.timezone} onChange={e => setProfile(p => ({ ...p, timezone: e.target.value }))}
                 className={inputClass} style={inputStyle}>
                 {['America/Los_Angeles', 'America/New_York', 'Asia/Tokyo', 'Asia/Shanghai', 'Europe/London', 'Asia/Jakarta'].map(tz => (
@@ -166,21 +166,21 @@ export default function SettingsView() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Satuan Suhu</label>
+              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Temperature Unit</label>
               <select className={inputClass} style={inputStyle}>
                 <option>Celsius (°C)</option>
                 <option>Fahrenheit (°F)</option>
               </select>
             </div>
             <div>
-              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Satuan Berat</label>
+              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Weight Unit</label>
               <select className={inputClass} style={inputStyle}>
                 <option>Kilogram (kg)</option>
                 <option>Pound (lbs)</option>
               </select>
             </div>
             <div>
-              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Mata Uang</label>
+              <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>Currency</label>
               <select className={inputClass} style={inputStyle}>
                 <option>USD ($)</option>
                 <option>JPY (¥)</option>
@@ -198,15 +198,15 @@ export default function SettingsView() {
               <Shield size={18}/>
             </div>
             <div>
-              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Keamanan Akun</h3>
-              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Ganti kata sandi untuk menjaga akun Anda tetap aman</p>
+              <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Account Security</h3>
+              <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Change your password to keep your account secure</p>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {[
-              { label: 'Kata Sandi Saat Ini', span: 'sm:col-span-2' },
-              { label: 'Kata Sandi Baru', span: '' },
-              { label: 'Konfirmasi Kata Sandi Baru', span: '' },
+              { label: 'Current Password', span: 'sm:col-span-2' },
+              { label: 'New Password', span: '' },
+              { label: 'Confirm New Password', span: '' },
             ].map(f => (
               <div key={f.label} className={f.span}>
                 <label className="text-xs font-black uppercase tracking-wider block mb-1.5" style={{ color: '#64748b' }}>{f.label}</label>
@@ -215,10 +215,10 @@ export default function SettingsView() {
             ))}
           </div>
           <button type="button"
-            onClick={() => showToast('info', 'Memverifikasi kata sandi...', 'Pastikan kata sandi baru minimal 8 karakter.')}
+            onClick={() => showToast('info', 'Verifying password...', 'Make sure your new password is at least 8 characters.')}
             className="mt-4 px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:opacity-80"
             style={{ background: 'rgba(239,68,68,0.08)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.15)' }}>
-            Ganti Kata Sandi
+            Change Password
           </button>
         </div>
 
@@ -229,7 +229,7 @@ export default function SettingsView() {
             background: saved ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #1e3a8a, #2a4db3)',
             boxShadow: saved ? '0 4px 15px rgba(16,185,129,0.35)' : '0 4px 15px rgba(30,58,138,0.35)',
           }}>
-          {saved ? <><Check size={18}/> Tersimpan!</> : <><Save size={18}/> Simpan Semua Perubahan</>}
+          {saved ? <><Check size={18}/>Saved!</> : <><Save size={18}/>Save All Changes</>}
         </button>
       </form>
     </div>

@@ -5,18 +5,18 @@ import { Thermometer, Droplets, Zap, AlertTriangle, CheckCircle2, Clock, Package
 import { useToast } from './Toast';
 
 const chambers = [
-  { id: 'A1', name: 'Ruang A1 — Tuna Bluefin', setTemp: -2, currTemp: -1.8, humidity: 85, capacity: 78, maxCap: 5000, currCap: 3900, status: 'Normal', product: 'Tuna Bluefin / Bulu Babi', location: 'Gedung A, Lantai 1' },
-  { id: 'A2', name: 'Ruang A2 — Seafood Campuran', setTemp: 0, currTemp: 0.5, humidity: 82, capacity: 62, maxCap: 4000, currCap: 2480, status: 'Normal', product: 'Seafood Campuran / Kerang', location: 'Gedung A, Lantai 2' },
-  { id: 'B1', name: 'Ruang B1 — Wagyu Beef', setTemp: 2, currTemp: 3.8, humidity: 75, capacity: 45, maxCap: 6000, currCap: 2700, status: 'Peringatan', product: 'Daging Wagyu / Produk Daging', location: 'Gedung B, Lantai 1' },
-  { id: 'B2', name: 'Ruang B2 — Produk Segar', setTemp: 4, currTemp: 4.2, humidity: 90, capacity: 88, maxCap: 8000, currCap: 7040, status: 'Normal', product: 'Buah & Sayuran Segar', location: 'Gedung B, Lantai 2' },
-  { id: 'C1', name: 'Ruang C1 — Penyimpanan Beku', setTemp: -18, currTemp: -18.5, humidity: 60, capacity: 55, maxCap: 10000, currCap: 5500, status: 'Normal', product: 'Seafood Beku / IQF', location: 'Gedung C, Lantai 1' },
-  { id: 'C2', name: 'Ruang C2 — Karantina Impor', setTemp: 1, currTemp: 2.9, humidity: 80, capacity: 30, maxCap: 3000, currCap: 900, status: 'Kritis', product: 'Kargo Karantina Impor', location: 'Gedung C, Lantai 2' },
+  { id: 'A1', name: 'Chamber A1 — Bluefin Tuna', setTemp: -2, currTemp: -1.8, humidity: 85, capacity: 78, maxCap: 5000, currCap: 3900, status: 'Normal', product: 'Bluefin Tuna / Sea Urchin', location: 'Building A, Floor 1' },
+  { id: 'A2', name: 'Chamber A2 — Mixed Seafood', setTemp: 0, currTemp: 0.5, humidity: 82, capacity: 62, maxCap: 4000, currCap: 2480, status: 'Normal', product: 'Mixed Seafood / Shellfish', location: 'Building A, Floor 2' },
+  { id: 'B1', name: 'Chamber B1 — Wagyu Beef', setTemp: 2, currTemp: 3.8, humidity: 75, capacity: 45, maxCap: 6000, currCap: 2700, status: 'Warning', product: 'Wagyu Beef / Meat Products', location: 'Building B, Floor 1' },
+  { id: 'B2', name: 'Chamber B2 — Fresh Produce', setTemp: 4, currTemp: 4.2, humidity: 90, capacity: 88, maxCap: 8000, currCap: 7040, status: 'Normal', product: 'Fresh Fruits & Vegetables', location: 'Building B, Floor 2' },
+  { id: 'C1', name: 'Chamber C1 — Frozen Storage', setTemp: -18, currTemp: -18.5, humidity: 60, capacity: 55, maxCap: 10000, currCap: 5500, status: 'Normal', product: 'Frozen Seafood / IQF', location: 'Building C, Floor 1' },
+  { id: 'C2', name: 'Chamber C2 — Import Quarantine', setTemp: 1, currTemp: 2.9, humidity: 80, capacity: 30, maxCap: 3000, currCap: 900, status: 'Critical', product: 'Import Quarantine Cargo', location: 'Building C, Floor 2' },
 ];
 
 const statusMeta = {
-  'Normal':    { color: '#10b981', bg: 'rgba(16,185,129,0.1)',  icon: <CheckCircle2 size={14}/>, label: 'Normal' },
-  'Peringatan':{ color: '#f59e0b', bg: 'rgba(245,158,11,0.1)',  icon: <AlertTriangle size={14}/>, label: 'Peringatan' },
-  'Kritis':    { color: '#ef4444', bg: 'rgba(239,68,68,0.1)',   icon: <AlertTriangle size={14}/>, label: 'Kritis' },
+  'Normal':   { color: '#10b981', bg: 'rgba(16,185,129,0.1)',  icon: <CheckCircle2 size={14}/>, label: 'Normal' },
+  'Warning':  { color: '#f59e0b', bg: 'rgba(245,158,11,0.1)',  icon: <AlertTriangle size={14}/>, label: 'Warning' },
+  'Critical': { color: '#ef4444', bg: 'rgba(239,68,68,0.1)',   icon: <AlertTriangle size={14}/>, label: 'Critical' },
 };
 
 function TempGauge({ setTemp, currTemp }: { setTemp: number; currTemp: number }) {
@@ -55,10 +55,10 @@ export default function ColdStorageView() {
       {/* Summary KPI */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
         {[
-          { label: 'Total Kapasitas', value: `${maxTotal.toLocaleString()} kg`, icon: <Package size={16}/>, color: '#1e3a8a', bg: 'rgba(30,58,138,0.08)', desc: 'kapasitas penuh' },
-          { label: 'Stok Tersimpan', value: `${total.toLocaleString()} kg`, icon: <Thermometer size={16}/>, color: '#10b981', bg: 'rgba(16,185,129,0.08)', desc: 'saat ini' },
-          { label: 'Ruang Aktif', value: `${chambers.length}`, icon: <Zap size={16}/>, color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', desc: 'beroperasi' },
-          { label: 'Perlu Perhatian', value: `${alertCount}`, icon: <AlertTriangle size={16}/>, color: alertCount > 0 ? '#ef4444' : '#10b981', bg: alertCount > 0 ? 'rgba(239,68,68,0.08)' : 'rgba(16,185,129,0.08)', desc: alertCount > 0 ? 'segera cek' : 'semua normal' },
+          { label: 'Total Capacity', value: `${maxTotal.toLocaleString()} kg`, icon: <Package size={16}/>, color: '#1e3a8a', bg: 'rgba(30,58,138,0.08)', desc: 'maximum capacity' },
+          { label: 'Stored Inventory', value: `${total.toLocaleString()} kg`, icon: <Thermometer size={16}/>, color: '#10b981', bg: 'rgba(16,185,129,0.08)', desc: 'currently stored' },
+          { label: 'Active Chambers', value: `${chambers.length}`, icon: <Zap size={16}/>, color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', desc: 'in operation' },
+          { label: 'Needs Attention', value: `${alertCount}`, icon: <AlertTriangle size={16}/>, color: alertCount > 0 ? '#ef4444' : '#10b981', bg: alertCount > 0 ? 'rgba(239,68,68,0.08)' : 'rgba(16,185,129,0.08)', desc: alertCount > 0 ? 'check immediately' : 'all normal' },
         ].map((k, i) => (
           <div key={i} className="glass-card p-4 sm:p-5 cursor-pointer hover:scale-[1.02] transition-transform"
             onClick={() => showToast('info', k.label, `${k.value} — ${k.desc}`)}>
@@ -74,8 +74,8 @@ export default function ColdStorageView() {
 
       {/* Chambers Grid */}
       <div className="flex items-center justify-between">
-        <h3 className="font-black text-sm uppercase tracking-wider" style={{ color: '#94a3b8' }}>Daftar Ruang Pendingin</h3>
-        <span className="text-xs font-medium" style={{ color: '#94a3b8' }}>Klik ruang untuk lihat detail</span>
+        <h3 className="font-black text-sm uppercase tracking-wider" style={{ color: '#94a3b8' }}>Cold Storage Chambers</h3>
+        <span className="text-xs font-medium" style={{ color: '#94a3b8' }}>Click a chamber to view details</span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         {chambers.map(c => {
@@ -110,7 +110,7 @@ export default function ColdStorageView() {
                 <div className="flex-1 space-y-3">
                   <div>
                     <div className="flex justify-between mb-1">
-                      <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#64748b' }}><Droplets size={11}/>Kelembaban</span>
+                      <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#64748b' }}><Droplets size={11}/>Humidity</span>
                       <span className="text-xs font-black" style={{ color: '#0f172a' }}>{c.humidity}%</span>
                     </div>
                     <div className="h-1.5 rounded-full w-full" style={{ background: 'rgba(0,0,0,0.06)' }}>
@@ -119,7 +119,7 @@ export default function ColdStorageView() {
                   </div>
                   <div>
                     <div className="flex justify-between mb-1">
-                      <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#64748b' }}><Package size={11}/>Kapasitas</span>
+                      <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#64748b' }}><Package size={11}/>Capacity</span>
                       <span className="text-xs font-black" style={{ color: '#0f172a' }}>{capPct}%</span>
                     </div>
                     <div className="h-1.5 rounded-full w-full" style={{ background: 'rgba(0,0,0,0.06)' }}>
@@ -132,7 +132,7 @@ export default function ColdStorageView() {
 
               {/* Product info */}
               <div className="text-xs font-medium px-3 py-2 rounded-lg" style={{ background: 'rgba(0,0,0,0.03)', color: '#64748b' }}>
-                <span className="font-bold" style={{ color: '#475569' }}>Stok Saat Ini:</span> {c.product}
+                <span className="font-bold" style={{ color: '#475569' }}>Current Stock:</span> {c.product}
               </div>
 
               {/* Alert banner */}
@@ -140,15 +140,15 @@ export default function ColdStorageView() {
                 <div className="flex items-start justify-between gap-2 text-xs font-bold px-3 py-2 rounded-lg" style={{ background: st.bg, color: st.color }}>
                   <span className="flex items-center gap-1.5">
                     {st.icon}
-                    {c.status === 'Peringatan'
-                      ? `Suhu melebihi setpoint sebesar ${Math.abs(c.currTemp - c.setTemp).toFixed(1)}°C`
-                      : 'Kritis — Segera lakukan inspeksi'}
+                    {c.status === 'Warning'
+                      ? `Temperature exceeded setpoint by ${Math.abs(c.currTemp - c.setTemp).toFixed(1)}°C`
+                      : 'Critical — Immediate inspection required'}
                   </span>
                   <button
-                    onClick={e => { e.stopPropagation(); showToast('warning', `Alarm dikirim untuk Ruang ${c.id}`, 'Tim teknisi telah diberitahu dan sedang dalam perjalanan.'); }}
+                    onClick={e => { e.stopPropagation(); showToast('warning', `Alert sent for Chamber ${c.id}`, 'Technician team has been notified and is on the way.'); }}
                     className="flex items-center gap-1 px-2 py-1 rounded-lg font-black flex-shrink-0 hover:opacity-80 transition-opacity"
                     style={{ background: `${st.color}20`, border: `1px solid ${st.color}30` }}>
-                    <Bell size={10}/> Kirim Alarm
+                    <Bell size={10}/> Send Alert
                   </button>
                 </div>
               )}
@@ -156,7 +156,7 @@ export default function ColdStorageView() {
               {/* Expanded details */}
               {isExpanded && (
                 <div className="border-t pt-3 space-y-2 animate-fade-up" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
-                  <p className="text-xs font-black uppercase tracking-wider" style={{ color: '#94a3b8' }}>Riwayat Suhu (24 jam terakhir)</p>
+                  <p className="text-xs font-black uppercase tracking-wider" style={{ color: '#94a3b8' }}>Temperature History (Last 24 hours)</p>
                   <div className="flex gap-1.5">
                     {[...Array(24)].map((_, i) => {
                       const variation = (Math.random() - 0.5) * 2;
@@ -169,10 +169,10 @@ export default function ColdStorageView() {
                     })}
                   </div>
                   <button
-                    onClick={e => { e.stopPropagation(); showToast('info', `Laporan Ruang ${c.id} sedang disiapkan`, 'File akan diunduh dalam beberapa detik.'); }}
+                    onClick={e => { e.stopPropagation(); showToast('info', `Chamber ${c.id} report is being prepared`, 'File will download in a few seconds.'); }}
                     className="w-full py-2 rounded-lg text-xs font-bold transition-all hover:opacity-80"
                     style={{ background: 'rgba(30,58,138,0.08)', color: '#1e3a8a' }}>
-                    Unduh Laporan Suhu
+                    Download Temperature Report
                   </button>
                 </div>
               )}
@@ -184,28 +184,28 @@ export default function ColdStorageView() {
       {/* Sensor Log */}
       <div className="glass-card p-5 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Log Sensor Terbaru</h3>
+          <h3 className="font-black text-base" style={{ color: '#0f172a' }}>Recent Sensor Log</h3>
           <button
-            onClick={() => showToast('info', 'Memuat log lengkap...', 'Riwayat 30 hari terakhir sedang disiapkan.')}
+            onClick={() => showToast('info', 'Loading full log...', '30-day history is being prepared.')}
             className="text-xs font-bold px-3 py-1.5 rounded-lg transition-all hover:opacity-80"
             style={{ background: 'rgba(30,58,138,0.08)', color: '#1e3a8a' }}>
-            Lihat Semua Log
+            View All Logs
           </button>
         </div>
         <div className="space-y-2">
           {[
-            { time: '12:45:02', chamber: 'C2', event: 'Suhu melebihi batas (+1,9°C di atas setpoint)', type: 'kritis' },
-            { time: '12:30:18', chamber: 'B1', event: 'Deviasi suhu terdeteksi (+1,8°C di atas setpoint)', type: 'peringatan' },
-            { time: '11:55:00', chamber: 'A1', event: 'Siklus pendinginan ulang berhasil diselesaikan', type: 'info' },
-            { time: '10:20:44', chamber: 'B2', event: 'Kargo baru masuk — 840 kg sayuran segar', type: 'info' },
-            { time: '09:15:30', chamber: 'C1', event: 'Siklus defrost dimulai dan selesai dengan baik', type: 'info' },
+            { time: '12:45:02', chamber: 'C2', event: 'Temperature exceeded limit (+1.9°C above setpoint)', type: 'critical' },
+            { time: '12:30:18', chamber: 'B1', event: 'Temperature deviation detected (+1.8°C above setpoint)', type: 'warning' },
+            { time: '11:55:00', chamber: 'A1', event: 'Re-icing cycle completed successfully', type: 'info' },
+            { time: '10:20:44', chamber: 'B2', event: 'New cargo received — 840 kg fresh produce', type: 'info' },
+            { time: '09:15:30', chamber: 'C1', event: 'Defrost cycle started and completed successfully', type: 'info' },
           ].map((ev, i) => (
             <div key={i} className="flex flex-wrap items-start sm:items-center gap-2 sm:gap-4 text-sm py-2.5 border-b cursor-pointer hover:bg-slate-50/50 rounded-lg px-2 transition-colors"
               style={{ borderColor: 'rgba(0,0,0,0.05)' }}
-              onClick={() => showToast(ev.type === 'kritis' ? 'error' : ev.type === 'peringatan' ? 'warning' : 'info', `Ruang ${ev.chamber} — ${ev.time}`, ev.event)}>
+              onClick={() => showToast(ev.type === 'critical' ? 'error' : ev.type === 'warning' ? 'warning' : 'info', `Chamber ${ev.chamber} — ${ev.time}`, ev.event)}>
               <span className="text-xs font-mono font-bold flex-shrink-0" style={{ color: '#94a3b8' }}>{ev.time}</span>
               <span className="text-xs font-black px-2 py-0.5 rounded-md flex-shrink-0" style={{ background: 'rgba(30,58,138,0.1)', color: '#1e3a8a' }}>{ev.chamber}</span>
-              <span className="flex-1 min-w-0 font-medium text-xs sm:text-sm" style={{ color: ev.type === 'kritis' ? '#ef4444' : ev.type === 'peringatan' ? '#f59e0b' : '#475569' }}>
+              <span className="flex-1 min-w-0 font-medium text-xs sm:text-sm" style={{ color: ev.type === 'critical' ? '#ef4444' : ev.type === 'warning' ? '#f59e0b' : '#475569' }}>
                 {ev.event}
               </span>
             </div>
