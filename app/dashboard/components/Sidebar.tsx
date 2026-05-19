@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import {
   LayoutDashboard, ClipboardList, MapPin, Thermometer,
   Users, BarChart2, Bell, Settings, LogOut, ChevronRight,
-  Package, Globe, X
+  Globe, X, UserCircle
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -16,16 +16,17 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { id: 'overview',    label: 'Dashboard',        icon: LayoutDashboard },
-  { id: 'shipments',  label: 'Manage Shipments',  icon: ClipboardList },
-  { id: 'tracking',   label: 'Live Tracking',     icon: MapPin },
-  { id: 'storage',    label: 'Cold Storage',      icon: Thermometer },
-  { id: 'clients',    label: 'Clients',           icon: Users },
-  { id: 'analytics',  label: 'Analytics',         icon: BarChart2 },
+  { id: 'overview', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'shipments', label: 'Manage Shipments', icon: ClipboardList },
+  { id: 'tracking', label: 'Live Tracking', icon: MapPin },
+  { id: 'storage', label: 'Cold Storage', icon: Thermometer },
+  { id: 'clients', label: 'Clients', icon: Users },
+  { id: 'analytics', label: 'Analytics', icon: BarChart2 },
 ];
 
 const bottomItems = [
-  { id: 'alerts',   label: 'Alerts',   icon: Bell },
+  { id: 'alerts', label: 'Alerts', icon: Bell },
+  { id: 'profile', label: 'My Profile', icon: UserCircle },
   { id: 'settings', label: 'Settings', icon: Settings },
 ];
 
@@ -39,7 +40,7 @@ export default function Sidebar({ activeMenu, setActiveMenu, unreadAlerts = 3, i
 
   const handleMenuClick = (id: string) => {
     setActiveMenu(id);
-    onClose(); // close sidebar on mobile after navigation
+    onClose();
   };
 
   const NavBtn = ({ item, badge }: { item: typeof navItems[0]; badge?: number }) => {
@@ -62,7 +63,7 @@ export default function Sidebar({ activeMenu, setActiveMenu, unreadAlerts = 3, i
           <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full"
             style={{ background: '#f59e0b' }} />
         )}
-        <Icon size={17} className={`flex-shrink-0 transition-colors ${isActive ? 'text-amber-500' : 'text-slate-400 group-hover:text-slate-600'}`}/>
+        <Icon size={17} className={`flex-shrink-0 transition-colors ${isActive ? 'text-amber-500' : 'text-slate-400 group-hover:text-slate-600'}`} />
         <span className="flex-1 text-left">{item.label}</span>
         {badge && badge > 0 && (
           <span className="text-xs font-bold text-white px-1.5 py-0.5 rounded-full min-w-[20px] text-center"
@@ -70,7 +71,7 @@ export default function Sidebar({ activeMenu, setActiveMenu, unreadAlerts = 3, i
             {badge}
           </span>
         )}
-        {isActive && <ChevronRight size={14} className="text-amber-400"/>}
+        {isActive && <ChevronRight size={14} className="text-amber-400" />}
       </button>
     );
   };
@@ -103,20 +104,22 @@ export default function Sidebar({ activeMenu, setActiveMenu, unreadAlerts = 3, i
         }}>
 
         {/* ── Logo + Close Button (mobile) ── */}
-        <div className="px-6 py-5 flex items-center gap-3 border-b"
+        <div className="px-5 py-4 flex items-center justify-between border-b gap-2"
           style={{ borderColor: 'rgba(255,255,255,0.6)' }}>
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)' }}>
-            <Package size={16} className="text-white" />
+
+          {/* LOGO FIX MENGGUNAKAN .PNG */}
+          <div className="flex-1 flex items-center justify-start">
+            <img
+              src="/logo_nax-FIX.png"
+              alt="NAX USA Logistics Logo"
+              className="h-11 lg:h-16 w-auto object-contain lg:scale-110 origin-left"
+            />
           </div>
-          <div className="flex-1">
-            <p className="font-black text-sm" style={{ color: '#0f2557' }}>NAX-Nest</p>
-            <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Logistics Portal</p>
-          </div>
+
           {/* Close button — mobile only */}
           <button
             onClick={onClose}
-            className="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg transition-colors"
+            className="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
             style={{ background: 'rgba(0,0,0,0.05)', color: '#64748b' }}
             aria-label="Close menu"
           >
@@ -143,17 +146,25 @@ export default function Sidebar({ activeMenu, setActiveMenu, unreadAlerts = 3, i
 
         {/* ── User Profile ── */}
         <div className="p-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.6)' }}>
-          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl mb-3"
-            style={{ background: 'rgba(30,58,138,0.05)' }}>
-            <img src="https://i.pravatar.cc/150?img=11" alt="User" className="w-8 h-8 rounded-full border-2" style={{ borderColor: '#f59e0b' }}/>
-            <div className="flex-1 min-w-0">
+          <button
+            onClick={() => handleMenuClick('profile')}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl mb-3 transition-all hover:scale-[1.01]"
+            style={activeMenu === 'profile'
+              ? { background: 'rgba(30,58,138,0.1)', border: '1px solid rgba(30,58,138,0.15)' }
+              : { background: 'rgba(30,58,138,0.05)', border: '1px solid transparent' }}>
+            <div className="relative flex-shrink-0">
+              <img src="https://i.pravatar.cc/150?img=11" alt="User" className="w-9 h-9 rounded-full border-2 object-cover" style={{ borderColor: '#f59e0b' }} />
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-white" style={{ background: '#10b981' }} />
+            </div>
+            <div className="flex-1 min-w-0 text-left">
               <p className="text-sm font-bold truncate" style={{ color: '#0f172a' }}>John Abraham</p>
               <div className="flex items-center gap-1">
-                <Globe size={10} className="text-green-500"/>
-                <p className="text-xs font-medium" style={{ color: '#94a3b8' }}>Operations Manager</p>
+                <Globe size={9} className="text-green-500" />
+                <p className="text-xs font-medium truncate" style={{ color: '#94a3b8' }}>Operations Manager</p>
               </div>
             </div>
-          </div>
+            <ChevronRight size={14} className="text-slate-300 flex-shrink-0" />
+          </button>
           <button
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-sm font-bold transition-all hover:opacity-90"
