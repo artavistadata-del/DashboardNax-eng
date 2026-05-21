@@ -16,11 +16,11 @@ const STATS = [
 ];
 
 const ACTIVITY = [
-  { icon: <Package size={14}/>, color: '#1e3a8a', bg: 'rgba(30,58,138,0.1)', title: 'New shipment created', desc: 'NAX-20240508 — Japan Premium Beef · 320 kg', time: '2 hours ago' },
-  { icon: <CheckCircle2 size={14}/>, color: '#10b981', bg: 'rgba(16,185,129,0.1)', title: 'Delivery confirmed', desc: 'NAX-20240502 — Pacific Wagyu Co. delivered to LAX', time: '5 hours ago' },
-  { icon: <Users size={14}/>, color: '#f59e0b', bg: 'rgba(245,158,11,0.1)', title: 'New client onboarded', desc: 'Vietnam Seafood Export Ltd. registered', time: 'Yesterday' },
-  { icon: <BarChart2 size={14}/>, color: '#8b5cf6', bg: 'rgba(139,92,246,0.1)', title: 'Monthly report generated', desc: 'April 2026 operations report sent to management', time: '2 days ago' },
-  { icon: <Shield size={14}/>, color: '#ef4444', bg: 'rgba(239,68,68,0.1)', title: 'Security login detected', desc: 'New device login from Los Angeles, CA', time: '3 days ago' },
+  { icon: <Package size={14} />, color: '#1e3a8a', bg: 'rgba(30,58,138,0.1)', title: 'New shipment created', desc: 'NAX-20240508 — Japan Premium Beef · 320 kg', time: '2 hours ago' },
+  { icon: <CheckCircle2 size={14} />, color: '#10b981', bg: 'rgba(16,185,129,0.1)', title: 'Delivery confirmed', desc: 'NAX-20240502 — Pacific Wagyu Co. delivered to LAX', time: '5 hours ago' },
+  { icon: <Users size={14} />, color: '#f59e0b', bg: 'rgba(245,158,11,0.1)', title: 'New client onboarded', desc: 'Vietnam Seafood Export Ltd. registered', time: 'Yesterday' },
+  { icon: <BarChart2 size={14} />, color: '#8b5cf6', bg: 'rgba(139,92,246,0.1)', title: 'Monthly report generated', desc: 'April 2026 operations report sent to management', time: '2 days ago' },
+  { icon: <Shield size={14} />, color: '#ef4444', bg: 'rgba(239,68,68,0.1)', title: 'Security login detected', desc: 'New device login from Los Angeles, CA', time: '3 days ago' },
 ];
 
 const BADGES = [
@@ -56,125 +56,133 @@ export default function ProfileView() {
   };
 
   return (
-    <div className="space-y-6 animate-fade-up">
+    <div className="space-y-6 animate-fade-up text-left">
 
       {/* ── Hero Banner ── */}
       <div className="glass-card overflow-hidden">
         {/* Cover gradient */}
-        <div className="h-36 relative"
+        <div className="h-40 relative"
           style={{ background: 'linear-gradient(135deg, #0f2557 0%, #1e3a8a 45%, #2a4db3 70%, #f59e0b 100%)' }}>
           {/* Decorative grid */}
           <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="pg" width="32" height="32" patternUnits="userSpaceOnUse">
-                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" strokeWidth="0.6"/>
+                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" strokeWidth="0.6" />
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#pg)"/>
+            <rect width="100%" height="100%" fill="url(#pg)" />
           </svg>
           {/* Route lines decoration */}
           <div className="absolute inset-0 flex items-center justify-end pr-10 gap-6 opacity-20">
-            <Plane size={28} className="text-white rotate-12"/>
-            <Ship size={32} className="text-white"/>
+            <Plane size={32} className="text-white rotate-12" />
+            <Ship size={36} className="text-white" />
           </div>
           {/* Edit cover btn */}
           <button
             onClick={() => showToast('info', 'Cover photo upload coming soon')}
-            className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all hover:opacity-80"
+            className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all hover:opacity-80"
             style={{ background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(8px)' }}>
-            <Camera size={12}/> Edit Cover
+            <Camera size={12} /> Edit Cover
           </button>
         </div>
 
         {/* Profile info row */}
-        <div className="px-6 pb-6">
-          <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-10 mb-5">
+        <div className="px-6 sm:px-8 pb-6">
+
+          {/* PERBAIKAN 2: Menggunakan sm:items-end agar Nama sejajar bawah foto di desktop */}
+          <div className="flex flex-col sm:flex-row sm:items-end gap-5 mb-5 w-full">
+
             {/* Avatar */}
-            <div className="relative flex-shrink-0">
+            <div className="relative flex-shrink-0 -mt-12 sm:-mt-16">
               <img src="https://i.pravatar.cc/150?img=11" alt="Profile"
-                className="w-20 h-20 rounded-2xl border-4 border-white object-cover shadow-lg"/>
+                className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl border-4 border-white object-cover shadow-md bg-white" />
+
+              {/* PERBAIKAN 1: Posisi kamera nimpa sudut border (bottom-0 right-0 + translate) */}
               <button
                 onClick={() => showToast('info', 'Photo upload coming soon')}
-                className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center text-white shadow-md transition-all hover:scale-110"
+                className="absolute bottom-0 right-0 w-8 h-8 rounded-full flex items-center justify-center text-white shadow-lg transition-all hover:scale-110 border-2 border-white translate-x-1/4 translate-y-1/4"
                 style={{ background: '#f59e0b' }}>
-                <Camera size={12}/>
+                <Camera size={14} />
               </button>
             </div>
 
-            {/* Name + Role */}
-            <div className="flex-1 min-w-0 pt-2 sm:pt-0">
+            {/* Name + Role + Badges */}
+            {/* PERBAIKAN: pt-4 di desktop memberikan jarak dari banner, tapi items-end memastikan sejajar bawah foto */}
+            <div className="flex-1 min-w-0 pt-1 sm:pt-4">
               {editMode ? (
                 <div className="flex flex-col gap-2">
                   <input value={profile.name} onChange={e => setProfile(p => ({ ...p, name: e.target.value }))}
                     className="text-xl font-black rounded-lg px-3 py-1.5 outline-none w-full sm:w-64"
-                    style={{ border: '1.5px solid #1e3a8a', color: '#0f172a', background: '#f8fafc' }}/>
+                    style={{ border: '1.5px solid #1e3a8a', color: '#0f172a', background: '#f8fafc' }} />
                   <input value={profile.role} onChange={e => setProfile(p => ({ ...p, role: e.target.value }))}
                     className="text-sm font-semibold rounded-lg px-3 py-1.5 outline-none w-full sm:w-48"
-                    style={{ border: '1.5px solid #e2e8f0', color: '#64748b', background: '#f8fafc' }}/>
+                    style={{ border: '1.5px solid #e2e8f0', color: '#64748b', background: '#f8fafc' }} />
                 </div>
               ) : (
-                <>
-                  <h2 className="text-xl sm:text-2xl font-black" style={{ color: '#0f172a' }}>{profile.name}</h2>
+                <div className="flex flex-col">
+                  <h2 className="text-xl sm:text-2xl font-black leading-tight" style={{ color: '#0f172a' }}>{profile.name}</h2>
                   <p className="text-sm font-semibold mt-0.5" style={{ color: '#64748b' }}>{profile.role}</p>
-                  <div className="flex flex-wrap items-center gap-2 mt-2">
-                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full"
+
+                  {/* Pills/Badges Status - mt-2.5 agar tidak terlalu dempet */}
+                  <div className="flex flex-wrap items-center gap-2 mt-2.5">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full"
                       style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981' }}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"/> Online
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Online
                     </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full"
-                      style={{ background: 'rgba(30,58,138,0.08)', color: '#1e3a8a' }}>
-                      <MapPin size={10}/> {profile.location}
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full"
+                      style={{ background: 'rgba(30,58,138,0.06)', color: '#1e3a8a' }}>
+                      <MapPin size={10} /> {profile.location}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full"
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full"
                       style={{ background: 'rgba(0,0,0,0.04)', color: '#64748b' }}>
-                      <Calendar size={10}/> Joined {profile.joined}
+                      <Calendar size={10} /> Joined {profile.joined}
                     </span>
                   </div>
-                </>
+                </div>
               )}
             </div>
 
-            {/* Action buttons */}
-            <div className="flex gap-2 flex-shrink-0">
+            {/* Action buttons (Aligned to top right of the text area on desktop) */}
+            <div className="flex gap-2 flex-shrink-0 mt-2 sm:mt-0 sm:self-start sm:pt-4 pt-1">
               {editMode ? (
                 <>
                   <button onClick={save}
-                    className="px-5 py-2 rounded-xl text-sm font-black text-white transition-all hover:opacity-90"
-                    style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)', boxShadow: '0 4px 12px rgba(30,58,138,0.3)' }}>
+                    className="px-5 py-2.5 rounded-xl text-sm font-black text-white transition-all hover:opacity-90 shadow-md"
+                    style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)' }}>
                     Save Changes
                   </button>
                   <button onClick={() => setEditMode(false)}
-                    className="px-4 py-2 rounded-xl text-sm font-bold transition-all hover:opacity-80"
-                    style={{ background: 'rgba(0,0,0,0.06)', color: '#64748b' }}>
+                    className="px-4 py-2.5 rounded-xl text-sm font-bold transition-all hover:opacity-80"
+                    style={{ background: 'rgba(0,0,0,0.05)', color: '#64748b' }}>
                     Cancel
                   </button>
                 </>
               ) : (
                 <button onClick={() => setEditMode(true)}
-                  className="flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)', boxShadow: '0 4px 12px rgba(30,58,138,0.3)' }}>
-                  <Edit2 size={14}/> Edit Profile
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 shadow-md h-fit"
+                  style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)' }}>
+                  <Edit2 size={14} /> Edit Profile
                 </button>
               )}
             </div>
           </div>
 
-          {/* Bio */}
-          <div className="max-w-2xl">
+          {/* Bio (No space below photo) */}
+          <div className="max-w-2xl text-left">
             {editMode ? (
               <textarea value={profile.bio} onChange={e => setProfile(p => ({ ...p, bio: e.target.value }))}
                 rows={3}
                 className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none"
-                style={{ border: '1.5px solid #e2e8f0', color: '#475569', background: '#f8fafc', fontFamily: 'Inter' }}/>
+                style={{ border: '1.5px solid #e2e8f0', color: '#475569', background: '#f8fafc', fontFamily: 'Inter' }} />
             ) : (
-              <p className="text-sm leading-relaxed" style={{ color: '#64748b' }}>{profile.bio}</p>
+              <p className="text-sm font-medium leading-relaxed" style={{ color: '#64748b' }}>{profile.bio}</p>
             )}
           </div>
         </div>
       </div>
 
       {/* ── KPI Stats ── */}
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 text-left">
         {STATS.map((s, i) => {
           const Icon = s.icon;
           return (
@@ -186,7 +194,7 @@ export default function ProfileView() {
                 <p className="text-xs font-black uppercase tracking-wider" style={{ color: '#94a3b8' }}>{s.label}</p>
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
                   style={{ background: s.bg }}>
-                  <Icon size={16} style={{ color: s.color }}/>
+                  <Icon size={16} style={{ color: s.color }} />
                 </div>
               </div>
               <p className="text-2xl font-black" style={{ color: '#0f172a' }}>{s.value}</p>
@@ -197,7 +205,7 @@ export default function ProfileView() {
       </div>
 
       {/* ── Two Column ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
 
         {/* LEFT — Contact + Skills + Badges */}
         <div className="space-y-5">
@@ -207,10 +215,10 @@ export default function ProfileView() {
             <h3 className="font-black text-sm uppercase tracking-wider mb-4" style={{ color: '#94a3b8' }}>Contact Info</h3>
             <div className="space-y-3">
               {[
-                { icon: <Mail size={15}/>, label: 'Email', val: profile.email, color: '#1e3a8a' },
-                { icon: <Phone size={15}/>, label: 'Phone', val: profile.phone, color: '#10b981' },
-                { icon: <MapPin size={15}/>, label: 'Location', val: profile.location, color: '#f59e0b' },
-                { icon: <Globe size={15}/>, label: 'Portal', val: 'naxusa.com/portal', color: '#8b5cf6' },
+                { icon: <Mail size={15} />, label: 'Email', val: profile.email, color: '#1e3a8a' },
+                { icon: <Phone size={15} />, label: 'Phone', val: profile.phone, color: '#10b981' },
+                { icon: <MapPin size={15} />, label: 'Location', val: profile.location, color: '#f59e0b' },
+                { icon: <Globe size={15} />, label: 'Portal', val: 'naxusa.com/portal', color: '#8b5cf6' },
               ].map((c, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -226,8 +234,8 @@ export default function ProfileView() {
             </div>
             <button
               onClick={() => showToast('info', 'Opening email client...')}
-              className="w-full mt-4 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90"
-              style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)', boxShadow: '0 4px 12px rgba(30,58,138,0.25)' }}>
+              className="w-full mt-4 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 shadow-md"
+              style={{ background: 'linear-gradient(135deg, #1e3a8a, #2a4db3)' }}>
               Send Message
             </button>
           </div>
@@ -247,7 +255,7 @@ export default function ProfileView() {
                       style={{
                         width: `${sk.value}%`,
                         background: sk.value > 90 ? '#1e3a8a' : sk.value > 80 ? '#10b981' : '#f59e0b'
-                      }}/>
+                      }} />
                   </div>
                 </div>
               ))}
@@ -273,17 +281,17 @@ export default function ProfileView() {
         </div>
 
         {/* RIGHT — Activity + Quick Actions */}
-        <div className="lg:col-span-2 space-y-5">
+        <div className="lg:col-span-2 space-y-5 text-left">
 
           {/* Quick Actions */}
           <div className="glass-card p-5">
             <h3 className="font-black text-sm uppercase tracking-wider mb-4" style={{ color: '#94a3b8' }}>Quick Actions</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { icon: <Package size={18}/>, label: 'New Shipment', color: '#1e3a8a', bg: 'rgba(30,58,138,0.08)' },
-                { icon: <Users size={18}/>, label: 'Add Client', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)' },
-                { icon: <BarChart2 size={18}/>, label: 'View Report', color: '#10b981', bg: 'rgba(16,185,129,0.08)' },
-                { icon: <ExternalLink size={18}/>, label: 'Export Data', color: '#8b5cf6', bg: 'rgba(139,92,246,0.08)' },
+                { icon: <Package size={18} />, label: 'New Shipment', color: '#1e3a8a', bg: 'rgba(30,58,138,0.08)' },
+                { icon: <Users size={18} />, label: 'Add Client', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)' },
+                { icon: <BarChart2 size={18} />, label: 'View Report', color: '#10b981', bg: 'rgba(16,185,129,0.08)' },
+                { icon: <ExternalLink size={18} />, label: 'Export Data', color: '#8b5cf6', bg: 'rgba(139,92,246,0.08)' },
               ].map((a, i) => (
                 <button key={i}
                   onClick={() => showToast('info', `${a.label}`, 'Navigating...')}
@@ -310,7 +318,7 @@ export default function ProfileView() {
                 onClick={() => showToast('info', 'Loading full activity log...')}
                 className="flex items-center gap-1.5 text-xs font-bold transition-all hover:opacity-70"
                 style={{ color: '#1e3a8a' }}>
-                View all <ExternalLink size={11}/>
+                View all <ExternalLink size={11} />
               </button>
             </div>
 
@@ -325,7 +333,7 @@ export default function ProfileView() {
                         style={{ background: a.bg, color: a.color }}>
                         {a.icon}
                       </div>
-                      {!isLast && <div className="w-px flex-1 my-2 min-h-[20px]" style={{ background: 'rgba(0,0,0,0.07)' }}/>}
+                      {!isLast && <div className="w-px flex-1 my-2 min-h-[20px]" style={{ background: 'rgba(0,0,0,0.07)' }} />}
                     </div>
                     <div className={`flex-1 ${isLast ? 'pb-0' : 'pb-4'}`}>
                       <div className="flex items-start justify-between gap-2 flex-wrap">
@@ -343,7 +351,7 @@ export default function ProfileView() {
           {/* Performance Snapshot */}
           <div className="glass-card p-5">
             <h3 className="font-black text-base mb-4" style={{ color: '#0f172a' }}>Performance Snapshot — May 2026</h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { label: 'Shipments This Month', value: '84', sub: 'vs 72 last month', color: '#1e3a8a' },
                 { label: 'Avg. Response Time', value: '1.8h', sub: 'SLA target: 2h', color: '#10b981' },
