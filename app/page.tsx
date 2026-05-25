@@ -33,7 +33,6 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     if (!email || !password) {
-      setError('Please enter your email and password to continue.');
       return;
     }
     setLoading(true);
@@ -45,11 +44,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex" style={{ fontFamily: "'Inter', sans-serif" }}>
-
-      {/* ── LEFT PANEL — Clean Form ── */}
-      <div className="flex-1 flex flex-col justify-center bg-white px-8 py-10 sm:px-12 lg:px-16 relative overflow-hidden">
-
-        {/* Subtle accent blobs */}
         <div className="absolute top-0 left-0 w-full h-2 rounded-none pointer-events-none"
           style={{ background: 'linear-gradient(90deg, #1e3a8a, #f59e0b)' }} />
         <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full pointer-events-none"
@@ -57,7 +51,7 @@ export default function LoginPage() {
         <div className="absolute -bottom-20 -right-20 w-56 h-56 rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(30,58,138,0.04), transparent 70%)' }} />
 
-        {/* Form area */}
+        {/* Area formulir */}
         <div className="w-full max-w-sm mx-auto relative z-10">
 
           {/* LOGO BARU NAX USA */}
@@ -69,17 +63,10 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Greeting */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-black mb-2 tracking-tight" style={{ color: '#0f172a' }}>
-              Welcome back!
-            </h1>
-            <p className="text-sm font-medium" style={{ color: '#64748b' }}>
-              Sign in to continue to your logistics portal.
             </p>
           </div>
 
-          {/* Error */}
+          {/* Kesalahan (Error) */}
           {error && (
             <div className="mb-5 flex items-start gap-2.5 rounded-xl px-4 py-3 text-sm font-medium"
               style={{ background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.2)', color: '#dc2626' }}>
@@ -121,7 +108,7 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Password */}
+            {/* Kata Sandi (Password) */}
             <div>
               <label className="block text-xs font-bold mb-2 uppercase tracking-wider" style={{ color: '#64748b' }}>
                 Password
@@ -130,7 +117,6 @@ export default function LoginPage() {
                 <input
                   id="login-password"
                   type={showPass ? 'text' : 'password'}
-                  placeholder="Enter your password"
                   value={password}
                   onChange={e => { setPassword(e.target.value); setError(''); }}
                   className="w-full pl-4 pr-11 py-3 rounded-xl text-sm outline-none transition-all"
@@ -161,7 +147,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Remember + Forgot */}
             <div className="flex items-center justify-between pt-1">
               <label className="flex items-center gap-2.5 cursor-pointer">
                 <div className="relative flex items-center justify-center">
@@ -180,18 +165,13 @@ export default function LoginPage() {
                     </div>
                   )}
                 </div>
-                <span className="text-sm font-medium" style={{ color: '#64748b' }}>Remember me</span>
-              </label>
-              <button
-                type="button"
-                onClick={() => alert('Password reset flow initiated.')}
                 className="text-sm font-bold transition-opacity hover:opacity-70"
                 style={{ color: '#1e3a8a' }}>
                 Forgot password?
               </button>
             </div>
 
-            {/* Submit */}
+            {/* Kirim (Submit) */}
             <button
               id="login-submit"
               type="submit"
@@ -209,42 +189,20 @@ export default function LoginPage() {
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Authenticating...
-                </>
-              ) : (
-                <>
-                  Sign In
+
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </>
               )}
             </button>
           </form>
 
-        </div>
-      </div>
 
-      {/* ── RIGHT PANEL — Beautified Visual Hero ── */}
       <div className="hidden lg:block w-[55%] relative overflow-hidden bg-slate-900">
 
-        {/* Background image */}
+        {/* Gambar latar belakang (Membaca gambar login-hero.jpg yang diberikan) */}
         <img
           src="/login-hero.jpg"
-          alt="NAX Logistics"
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
-        />
 
-        {/* Smoother, elegant gradient overlay */}
-        <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top, rgba(15,23,42,1) 0%, rgba(15,23,42,0.6) 40%, rgba(15,23,42,0.1) 100%)' }} />
-
-        {/* Content Area - Placed cleanly at the bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-16 pb-20">
-
-          {/* Top subtle badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wide uppercase mb-6"
-            style={{ background: 'rgba(245,158,11,0.15)', border: '1px solid rgba(245,158,11,0.3)', color: '#fbbf24' }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            Modern Logistics Hub
           </div>
 
           <h2 className="text-5xl font-black text-white leading-[1.1] mb-5 tracking-tight">
@@ -261,7 +219,7 @@ export default function LoginPage() {
             {SLIDES[activeSlide].sub}
           </p>
 
-          {/* Slide dots - Elegant style */}
+
           <div className="flex gap-2 mt-10">
             {SLIDES.map((_, i) => (
               <button
